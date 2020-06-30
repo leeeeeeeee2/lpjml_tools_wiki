@@ -1,5 +1,7 @@
 # LPJmL Tools 
 
+This is a repository for configuration files, and pre- and postprocessing tools for LPJmL runs within WUR. For the model itself, check out the official LPJmL repository maintained by PIK (see below).
+
 ## What is LPJmL?
 
 The model LPJmL ("Lund-Potsdam-Jena managed Land") is designed to simulate vegetation composition and distribution as well as stocks and land-atmosphere exchange flows of carbon and water, for both natural and agricultural ecosystems. Using a combination of plant physiological relations, generalized empirically established functions and plant trait parameters, it simulates processes such as photosynthesis, plant growth, maintenance and regeneration losses, fire disturbance, soil moisture, runoff, evapotranspiration, irrigation and vegetation structure.
