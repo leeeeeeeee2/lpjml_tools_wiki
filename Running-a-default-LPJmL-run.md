@@ -104,7 +104,7 @@ $LPJROOT/bin/lpjcheck lpjml.conf
 
 assuming `$LPJROOT` has already been defined and you run this command from the directory where `lpjml.conf` is located.  If everything has been defined correctly, the tool will tell you that all input files and output directories exist, and you're good to go.
 
-## Running the file
+## Running the model
 
 The basic command for running the model is:
 
