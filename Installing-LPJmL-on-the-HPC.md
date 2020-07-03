@@ -9,6 +9,14 @@ git clone https://github.com/PIK-LPJmL/LPJmL.git
 ```
 A logical place to do this is in (a subdirectory of) your home directory, which can be accessed from all nodes on the cluster. Note you shouldn't store any data in your home directory, instead use [the lustre file system for storing datasets](https://wiki.anunna.wur.nl/index.php/Filesystems). 
 
+You should get a directory `LPJmL` with several subdirectories (e.g., `config`, `bin`, `par`, etc.). This directory is your `LPJROOT` directory where the LPJmL code resides. After installing you can confirm the origin of the repository like this:
+
+```
+git remote show origin
+```
+
+which should show the URL of the original repository. 
+
 ## Compiling the model
 
 Some brief instructions can be found on the [LPJmL Wiki](https://github.com/PIK-LPJmL/LPJmL/wiki/HowTo). In particular it mentions:
