@@ -6,6 +6,10 @@ Here we attempt to adapt the default model configuration to our system.
 
 :information_source: Instead of modifying files in our copy of the official LPJmL repository, we can copy the files to a different directory and modify these copies. It may also be a good idea to put the configuration files that you use under version control, as these define all the settings used to run the model. You can use this WUR repository ([LPJmL_tools](https://git.wur.nl/danke010/lpjml_tools)) for this purpose. The configuration files for a standard run (driven by CRU climate data) have been copied from the official LPJmL repository (v4.0.002) and adapted for the setup on the WUR HPC.
 
+[[_TOC_]]
+
+## input.conf
+
 Open the file `input.conf` in a text editor and change the location of the file `input_crumonthly.conf` specifying the input files for a default CRU run. You can find this in section `III` of the file:
 
 ```
@@ -39,6 +43,8 @@ output/restart_1840_nv_stdfire.lpj /* filename of restart file */
 ```
 
 :warning: If we start a run from a restart file, we should also change the path and/or the filename of the (input) restart file in section `V`.
+
+## input_crumonthly.conf
 
 Next we open the file `input_crumonthly.conf` and change the paths of the relevant input files. Again, a trick to do this is to define an `inputdir` at the start of the file:
 
@@ -87,3 +93,74 @@ cellsize 0.5 0.5
 ```
 
 The safest way to do this is to provide the full path to where the binary file resides, as in the example above. 
+
+## Checking the configuration
+
+LPJmL provides a tool to check the configuration files. You can run the tool like this:
+
+```
+$LPJROOT/bin/lpjcheck lpjml.conf
+```
+
+assuming `$LPJROOT` has already been defined and you run this command from the directory where `lpjml.conf` is located.  If everything has been defined correctly, the tool will tell you that all input files and output directories exist, and you're good to go.
+
+## Running the file
+
+The basic command for running the model is:
+
+```
+$LPJROOT/bin/lpjml <configuration file>
+```
+
+You can give the full path to the configuration file (this might be a good idea if you run the model from a script):
+
+```
+$LPJROOT/bin/lpjml /home/WUR/danke010/mycode/lpjml_tools/conf/default_cru/lpjml.conf
+```
+
+:warning: **However**, on the HPC you shouldn't really run computational tasks on the login node. Instead, you should submit your model run as a job to the cluster. More information on submitting jobs can be found on the [HPC Wiki](https://wiki.anunna.wur.nl/index.php/Using_Slurm).
+
+To create a submission script, we create a new text file (e.g., `touch run_lpjml.conf`) and edit this file in a text editor. A basic submission script will look like this:
+
+```
+#!/bin/bash
+#-----------------------------Mail address-----------------------------
+#SBATCH --mail-user=your.email@wur.nl
+#SBATCH --mail-type=ALL
+#-----------------------------Output files-----------------------------
+#SBATCH --output=output_%j.txt
+#SBATCH --error=error_output_%j.txt
+#-----------------------------Other information------------------------
+#SBATCH --comment=3720021400
+#SBATCH --job-name=lpjml.conf
+#-----------------------------Required resources-----------------------
+#SBATCH --qos=std
+#SBATCH --time=60
+#SBATCH --ntasks=16
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=64000
+
+#-----------------------------Environment, Operations and Job steps----
+#load modules
+module load slurm mpich/gcc/64/3.1.3
+module load netcdf/gcc/64/4.3.3
+module load udunits/gcc/64/2.2.25
+
+ 
+export LPJROOT="/home/WUR/danke010/LPJml_v4.0.002/LPJmL"
+
+mpirun $LPJROOT/bin/lpjml /home/WUR/danke010/mycode/lpjml_tools/conf/default_cru/lpjml.conf
+
+```
+
+:information_source: For accounting purposes, it is common to put a project code after the comment (here: `3720021400`). It takes a bit trial and error to find suitable values for `time`, `ntasks` and `mem-per-cpu`. If your model run takes longer than the reservation (here: 60 minutes) then it will be aborted; if you reserved too much time and/or memory you will be told so in the email that you receive once the job is finished. 
+
+Note that we re-define the $LPJROOT environment variable and the relevant [environment modules](https://wiki.anunna.wur.nl/index.php/Environment_Modules) first. In this case we submit LPJmL in parallel mode by using `mpirun`, if this is not available we can use `srun` instead. 
+
+We can submit the job with `sbatch`
+
+```
+sbatch /home/WUR/danke010/mycode/lpjml_tools/conf/default_cru/run_lpjml.conf
+```
+
+Depending on the queue, your job may not run immediately; check the status of the queue with `squeue` or `squeue -u <userid>` where `<userid>` is your user ID (e.g., `danke010`). Once the model runs, you can check the progress by looking at the output files that the jobs create (as defined in the submission script). 
