@@ -105,7 +105,15 @@ We also need to change the location of the output files. This can be done in sec
 
 We can also change other settings such as the length of the spinup period and the type of output files we want, but we can leave the default settings for now. 
 
-:warning: If we start a run from a restart file, we should also change the path and/or the filename of the restart file in section `V`.
+Finally, we change the file location of the (output) restart file that will be produced in section `V`. You could write to the standard output directory `output` defined above, but if you later want to start a new model run from this restart file, you would have to point to the same directory, or move the file. 
+
+```
+NO_RESTART /* do not start from restart file */
+RESTART /* create restart file: the last year of simulation=restart-year */
+output/restart_1840_nv_stdfire.lpj /* filename of restart file */
+```
+
+:warning: If we start a run from a restart file, we should also change the path and/or the filename of the (input) restart file in section `V`.
 
 Next we open the file `input_crumonthly.conf` and change the paths of the relevant input files. Again, a trick to do this is to define an `inputdir` at the start of the file:
 
@@ -140,3 +148,17 @@ CLM2 /lustre/scratch/WUR/ESG/danke010/CALM/LPJmL_input/CRUDATA_TS3_23/cru_ts3.23
 ...
 CLM /data/biosx/mforkel/input_new/landcover_synmap_koeppen_vcf_newPFT_forLPJ_20130910.clm /*synmap_koeppen_vcf_NewPFT_adjustedByLanduse_SpinupTransitionPrescribed_forLPJ.clm*/
 ```
+
+:information_source: The default `input_crumonthly.conf` makes use of `META` files, a small text file describing the actual binary input files. If you have copied the standard input files from elsewhere, you need to change the path in this description file. For example, the file `soil.descr` looks like this:
+
+```
+remark "soil code data file"
+remark "valid soil codes are in the range 1..14"
+file /p/projects/biodiversity/input_VERSION2/soil_new_67420.bin
+firstcell 0
+ncell 67420
+datatype byte
+cellsize 0.5 0.5
+```
+
+The safest way to do this is to provide the full path to where the binary file resides, as in the example above. 
