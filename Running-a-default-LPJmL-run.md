@@ -157,7 +157,7 @@ mpirun $LPJROOT/bin/lpjml /home/WUR/danke010/mycode/lpjml_tools/conf/default_cru
 
 Note that we re-define the $LPJROOT environment variable and the relevant [environment modules](https://wiki.anunna.wur.nl/index.php/Environment_Modules) first. In this case we submit LPJmL in parallel mode by using `mpirun`, if this is not available we can use `srun` instead. 
 
-We can submit the job with `sbatch`
+We can submit the job script with `sbatch`
 
 ```
 sbatch /home/WUR/danke010/mycode/lpjml_tools/conf/default_cru/run_lpjml.conf
