@@ -11,3 +11,10 @@ A logical place to do this is in (a subdirectory of) your home directory, which 
 
 ## Compiling the model
 
+Some brief instructions can be found on the [LPJmL Wiki](https://github.com/PIK-LPJmL/LPJmL/wiki/HowTo). In particular it mentions:
+>>>
+There are several dependencies on standard libraries and compiler setting, please consult the configure.sh and the Makefile templates in the folder config and adjust these to your local setup.
+>>>
+How to get this to work on the WUR HPC? 
+
+
