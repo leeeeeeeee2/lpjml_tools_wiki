@@ -72,3 +72,11 @@ $ $LPJROOT/bin/lpjml
 ```
 
 If the model has compiled successfully, it will show the name of the model on the screen, but then fail with an error, as it is trying to read the default configuration file `lpjml.conf` which we haven't changed yet.
+
+## Running the model
+
+To run LPJmL, we need to modify the configuration files. The three main files to modify are: `lpjml.conf` (for the general setup - settings, or start and stop year), `input.conf` (setup of regional input files like climate, or landuse patterns) and `param.conf` (global model parameters).
+
+Here we attempt to adapt the default model configuration to our system. 
+
+:information_source: Instead of modifying files in our copy of the official LPJmL repository, we can copy the files to a different directory and modify these copies. It may also be a good idea to put the configuration files that you use under version control, as these define all the settings used to run the model. You can use this WUR repository ([LPJmL_tools](https://git.wur.nl/danke010/lpjml_tools)) for this purpose. The configuration files for a standard run (driven by CRU climate data) have been copied from the official LPJmL repository (v4.0.002) and adapted for the setup on the WUR HPC.
