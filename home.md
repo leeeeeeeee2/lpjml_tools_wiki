@@ -1,8 +1,8 @@
 # LPJmL Tools 
 
-[[_TOC_]]
-
 This is a repository for configuration files, and pre- and postprocessing tools for LPJmL runs within WUR. For the model itself, check out the official LPJmL repository maintained by PIK (see below).
+
+[[_TOC_]]
 
 ## What is LPJmL?
 
