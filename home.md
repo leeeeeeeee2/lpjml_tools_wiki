@@ -20,6 +20,8 @@ LPJmL version 4.0 as described by [Schaphoff et al. 2018a](http://dx.doi.org/10.
 * [LPJmL GitHub repository](https://github.com/PIK-LPJmL/LPJmL)
 * [LPJmL Wiki](https://github.com/PIK-LPJmL/LPJmL/wiki) with practical information on how to run the model
 
+Check out this Wiki for more information on [installing](https://git.wur.nl/danke010/lpjml_tools/-/wikis/Installing-LPJmL-on-the-HPC) and [running](https://git.wur.nl/danke010/lpjml_tools/-/wikis/Running-a-default-LPJmL-run) LPJmL on the WUR HPC.
+
 ## Getting started
 
 To clone this repository, type the following in a suitable working directory:
