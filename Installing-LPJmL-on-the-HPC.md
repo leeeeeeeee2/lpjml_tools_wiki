@@ -80,3 +80,26 @@ To run LPJmL, we need to modify the configuration files. The three main files to
 Here we attempt to adapt the default model configuration to our system. 
 
 :information_source: Instead of modifying files in our copy of the official LPJmL repository, we can copy the files to a different directory and modify these copies. It may also be a good idea to put the configuration files that you use under version control, as these define all the settings used to run the model. You can use this WUR repository ([LPJmL_tools](https://git.wur.nl/danke010/lpjml_tools)) for this purpose. The configuration files for a standard run (driven by CRU climate data) have been copied from the official LPJmL repository (v4.0.002) and adapted for the setup on the WUR HPC.
+
+Open the file `input.conf` in a text editor and change the location of the file `input_crumonthly.conf` specifying the input files for a default CRU run. You can find this in section `III` of the file:
+
+```
+/*===================================================================*/
+/*  III. Input data section                                          */
+/*===================================================================*/
+
+#include "/home/WUR/danke010/mycode/lpjml_tools/conf/default_cru/input_crumonthly.conf"    /* Input files of CRU dataset */
+
+```
+
+We also need to change the location of the output files. This can be done in section `IV` of the file, but a trick is to define the output directory at the top of the configuration file by adding a line `#define output` like this:
+
+```
+...
+#include "include/conf.h" /* include constant definitions */
+#define output /lustre/scratch/WUR/ESG/danke010/LPJmL/output/cru/default
+
+#define RIVER_ROUTING /*river routing enabled; exclude this line to disable river routing */
+...
+``` 
+
