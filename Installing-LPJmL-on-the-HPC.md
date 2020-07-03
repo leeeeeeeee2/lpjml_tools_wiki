@@ -103,3 +103,40 @@ We also need to change the location of the output files. This can be done in sec
 ...
 ``` 
 
+We can also change other settings such as the length of the spinup period and the type of output files we want, but we can leave the default settings for now. 
+
+:warning: If we start a run from a restart file, we should also change the path and/or the filename of the restart file in section `V`.
+
+Next we open the file `input_crumonthly.conf` and change the paths of the relevant input files. Again, a trick to do this is to define an `inputdir` at the start of the file:
+
+```
+...
+#include "include/conf.h" /* include constant definitions */
+#undef LPJ
+#define inputdir /lustre/scratch/WUR/ESG/danke010/CALM/LPJmL_input/input_VERSION2
+...
+```
+
+We can then replace the default destination in the file from the standard repository (`/p/projects/lpjml/input/historical/input_VERSION2`) with `inputdir` throughout the file, like this:
+
+```
+...
+//RAW inputdir/soil_new_67420.bin
+META inputdir/soil.descr
+CLM2 inputdir/grid.bin
+#ifdef WITH_LANDUSE
+...
+```
+
+We also need to specify the location of the climate input files, if these are different:
+
+```
+CLM2 /lustre/scratch/WUR/ESG/danke010/CALM/LPJmL_input/CRUDATA_TS3_23/cru_ts3.23.1901.2014.tmp.dat.clm
+CLM2 /lustre/scratch/WUR/ESG/danke010/CALM/LPJmL_input/CRUDATA_TS3_23/gpcc_v7_cruts3_23_precip_1901_2013.clm
+...
+CLM2 /lustre/scratch/WUR/ESG/danke010/CALM/LPJmL_input/CRUDATA_TS3_23/cru_ts3.23.1901.2014.cld.dat.clm
+...
+CLM2 /lustre/scratch/WUR/ESG/danke010/CALM/LPJmL_input/CRUDATA_TS3_23/cru_ts3.23.1901.2014.dtr.dat.clm            /* diurnal temp. range */
+...
+CLM /data/biosx/mforkel/input_new/landcover_synmap_koeppen_vcf_newPFT_forLPJ_20130910.clm /*synmap_koeppen_vcf_NewPFT_adjustedByLanduse_SpinupTransitionPrescribed_forLPJ.clm*/
+```
