@@ -23,6 +23,7 @@ Some brief instructions can be found on the [LPJmL Wiki](https://github.com/PIK-
 >>>
 There are several dependencies on standard libraries and compiler setting, please consult the configure.sh and the Makefile templates in the folder config and adjust these to your local setup.
 >>>
+
 How to get this to work on the WUR HPC? 
 
-
+the file `configure.sh` can be found in the `LPJROOT` directory. Open this file in a text editor (e.g., `nano`; if you are using the program MobaXterm to connect to the HPC, you can browse to the file and double-click on it to edit the file in MobaXterm's own text editor).
