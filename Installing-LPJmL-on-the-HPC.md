@@ -1,5 +1,7 @@
 # Installing LPJmL on Anunna, the WUR HPC
 
+[[_TOC_]]
+
 ## Downloading LPJmL
 The official LPJmL repository is on GitHub: https://github.com/PIK-LPJmL/LPJmL
 
