@@ -1,5 +1,7 @@
 # LPJmL Tools 
 
+[[_TOC_]]
+
 This is a repository for configuration files, and pre- and postprocessing tools for LPJmL runs within WUR. For the model itself, check out the official LPJmL repository maintained by PIK (see below).
 
 ## What is LPJmL?
@@ -18,3 +20,14 @@ LPJmL version 4.0 as described by [Schaphoff et al. 2018a](http://dx.doi.org/10.
 * [LPJmL GitHub repository](https://github.com/PIK-LPJmL/LPJmL)
 * [LPJmL Wiki](https://github.com/PIK-LPJmL/LPJmL/wiki) with practical information on how to run the model
 
+## Getting started
+
+To clone this repository, type the following in a suitable working directory:
+
+```
+$ git clone git@git.wur.nl:danke010/lpjml_tools.git
+```
+
+The URL for cloning can also be found in the [main repository page in GitLab](https://git.wur.nl/danke010/lpjml_tools).
+
+* [Some information on getting started with Git within WUR](https://wiki.anunna.wur.nl/index.php/Manual_GitLab)
