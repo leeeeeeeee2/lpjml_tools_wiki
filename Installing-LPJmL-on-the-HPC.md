@@ -50,13 +50,34 @@ Create executables with make all
 Put . /home/WUR/danke010/LPJml/LPJmL/bin/lpj_paths.sh in your /home/WUR/danke010/.profile
 ```
 
-And compile the model and all the utilities programmes:
+This will create a file `Makefile.inc` in the `LPJROOT` directory. You can try compiling the model with the `make` command (see below), but if we want to compile with support for netcdf files, we need to edit the makefile first. Some further details on all the compiling options can be found [on this page](http://www.pik-potsdam.de/~bloh/lpjml/install.html). First we need to add the flags for compiling with netcdf enabled:
+
+```
+LPJFLAGS  = -DUSE_RAND48 -DUSE_MPI -DSAFE -DWITH_FPE -DUSE_NETCDF -DUSE_UDUNITS -DUSE_NETCDF4 
+```
+
+We also need to explicitly set the paths to the netcdf shared libraries:
+
+```
+NETCDF_INC      = -I/cm/shared/apps/netcdf/gcc/64/4.3.3/include -I/cm/shared/apps/udunits/gcc/64/2.2.25/include
+NETCDF_LIB      = /cm/shared/apps/netcdf/gcc/64/4.3.3/lib
+UDUNITS_LIB      = /cm/shared/apps/udunits/gcc/64/2.2.25/lib
+```
+Finally, change the line with `LIBS = ` into
+
+```
+LIBS    = -lm -L$(NETCDF_LIB) -lnetcdf -L$(UDUNITS_LIB) -ludunits2
+```
+
+An example makefile that appears to work on Anunna has been [added to the repository](https://git.wur.nl/danke010/lpjml_tools/-/blob/master/Makefile.inc).
+
+Once the makefile has been edited we can compile the model and all the utilities programmes:
 
 ```
 $ make all
 ```
 
-This will print a lot of output to the screen, but if there are no error message, we can assume that compilation was successful. 
+This will print a lot of output to the screen, but if there are no error message, we can assume that compilation was successful. If we need to undo (or redo) the compilation, we need to use the command `make clean` first.
 
 
 You can set the `$LPJROOT` environment variable like this:
